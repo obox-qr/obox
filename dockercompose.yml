@@ -1,0 +1,22 @@
+version: '3'
+services:
+  oboxui:
+    build:
+      context: ./ui
+      dockerfile: Dockerfile.ui
+    volumes:
+      - ./ui:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - "8080:8080"
+  oboxbackend:
+    build:
+      context: ./server
+      dockerfile: Dockerfile.express
+    volumes:
+      - ./server:/usr/src/app
+      - /usr/src/app/node_modules
+    env_file:
+      - .env
+    ports:
+     - "${PORT}:3000"
