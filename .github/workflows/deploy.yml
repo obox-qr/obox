@@ -1,7 +1,5 @@
 name: Deploy
 
-oname: Deploy
-
 on:
   workflow_dispatch:
     inputs:
