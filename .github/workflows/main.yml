@@ -32,8 +32,8 @@ jobs:
 
     - name: Build and push UI image
       run: |
-        docker build --build-arg VITE_API_URL=${{ secrets.API_URL }} -t yandriievskyu/obox:ui -f ./ui/Dockerfile.ui ./ui
-        docker push yandriievskyu/obox:ui
+        docker build --build-arg VITE_API_URL=${{ secrets.API_URL }} -t yandriievskyi/obox:ui -f ./ui/Dockerfile.ui ./ui
+        docker push yandriievskyi/obox:ui
 
     - name: Build and push Backend image
       run: |
