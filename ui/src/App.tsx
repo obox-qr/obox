@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import axios from 'axios';
+import { config } from './config';
 
-const apiUrl = 'http://localhost:3000';
-
-console.log('API URL', apiUrl);
-
+const { apiUrl } = config;
 
 export const App = () => {
   const [message, setMessage] = useState('');
@@ -16,10 +14,6 @@ export const App = () => {
     }
 
     axios.get(apiUrl).then(({ data }) => {
-      console.log('apiUrl', apiUrl);
-
-      console.log(data);
-
       setMessage(data);
     });
   }, []);
