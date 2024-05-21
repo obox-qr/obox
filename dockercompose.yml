@@ -4,12 +4,14 @@ services:
     build:
       context: ./ui
       dockerfile: Dockerfile.ui
+      args:
+        - VITE_API_URL=${API_URL}
     image: yandriievskyi/obox:ui
     volumes:
       - ./ui:/usr/src/app
       - /usr/src/app/node_modules
-    env_file: 
-      - .env
+    environment:
+      - VITE_API_URL=${API_URL}
     ports:
       - "8080:8080"
   oboxbackend:
@@ -20,7 +22,7 @@ services:
     volumes:
       - ./server:/usr/src/app
       - /usr/src/app/node_modules
-    env_file:
-      - .env
+    environment:
+      - PORT=${PORT}
     ports:
-     - "${PORT}:3000"
+      - "3000:3000"
