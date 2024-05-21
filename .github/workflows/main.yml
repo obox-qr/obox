@@ -33,30 +33,20 @@ jobs:
       - name: Log in to Docker Hub
         run: echo "${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
 
-      - name: Build and push UI image (Production)
+      - name: Build and push UI image
         run: |
-          docker-compose -f docker-compose.yml build oboxui
-          docker tag yandriievskyi/obox:ui yandriievskyi/obox:ui
+          API_URL=${{ secrets.API_URL }} docker-compose -f docker-compose.prod.yml build oboxui
           docker push yandriievskyi/obox:ui
-        env:
-          API_URL: ${{ secrets.API_URL }}
-          NODE_ENV: production
 
-      - name: Build and push Backend image (Production)
+      - name: Build and push Backend image
         run: |
-          docker-compose -f docker-compose.yml build oboxbackend
-          docker tag yandriievskyi/obox:server yandriievskyi/obox:server
+          PORT=${{ secrets.API_PORT }} docker-compose -f docker-compose.prod.yml build oboxbackend
           docker push yandriievskyi/obox:server
-        env:
-          PORT: ${{ secrets.API_PORT }}
-          NODE_ENV: production
 
       - name: Trigger Render deploy for UI
         if: success()
-        run: |
-          curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_UI }}
+        run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_UI }}
 
       - name: Trigger Render deploy for Backend
         if: success()
-        run: |
-          curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_BACKEND }}
+        run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_BACKEND }}
