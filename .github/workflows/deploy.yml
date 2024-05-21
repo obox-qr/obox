@@ -14,7 +14,7 @@ on:
         default: 'true'
         type: boolean
 
-run-name: "Deploy: ${{ github.event.inputs.deploy_ui == 'true' && 'UI' }} ${{ github.event.inputs.deploy_backend == 'true' && 'Backend' }}"
+run-name: ${{ github.event.inputs.deploy_ui == 'true' && github.event.inputs.deploy_backend == 'false' && 'UI' || github.event.inputs.deploy_ui == 'false' && github.event.inputs.deploy_backend == 'true' && 'Backend' || github.event.inputs.deploy_ui == 'true' && github.event.inputs.deploy_backend == 'true' && 'UI and Backend' }}
 
 env:
   RENDER_DEPLOY_HOOK_UI: ${{ secrets.RENDER_DEPLOY_HOOK_UI }}
