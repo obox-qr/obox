@@ -16,4 +16,4 @@ else
 fi
 
 # Run docker-compose with the specified file
-docker-compose -f dockercompose.yml up --build
+docker-compose -f docker-compose.dev.yml up --build

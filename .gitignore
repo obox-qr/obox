@@ -39,5 +39,7 @@ jspm_packages
 
 #Excluding build directory
 public/
+dist/
+build/
 
 .env

@@ -27,17 +27,22 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
 
+    - name: Set up Docker Compose
+      run: sudo apt-get update && sudo apt-get install docker-compose -y
+
     - name: Log in to Docker Hub
       run: echo "${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
 
     - name: Build and push UI image
       run: |
-        docker build --build-arg VITE_API_URL=${{ secrets.API_URL }} -t yandriievskyi/obox:ui -f ./ui/Dockerfile.ui ./ui
+        docker-compose -f docker-compose.prod.yml build ui
+        docker tag $(docker-compose -f docker-compose.prod.yml images -q ui) yandriievskyi/obox:ui
         docker push yandriievskyi/obox:ui
 
     - name: Build and push Backend image
       run: |
-        docker build -t yandriievskyi/obox:server -f ./server/Dockerfile.express ./server
+        docker-compose -f docker-compose.prod.yml build backend
+        docker tag $(docker-compose -f docker-compose.prod.yml images -q backend) yandriievskyi/obox:server
         docker push yandriievskyi/obox:server
 
     - name: Trigger Render deploy for UI

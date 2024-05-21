@@ -20,7 +20,7 @@ export const App = () => {
 
   return (
     <>
-      <h1>Welcome message qwe: {message}</h1>
+      <h1>Welcome message: {message}</h1>
     </>
   );
 };
