@@ -20,7 +20,8 @@ export const App = () => {
 
   return (
     <>
-      <h1>Welcome message: {message}</h1>
+      <h1>Welcome to OBOX</h1>
+      <p>{message}</p>
     </>
   );
 };
