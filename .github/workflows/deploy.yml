@@ -1,0 +1,38 @@
+name: Deploy
+
+oname: Deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      deploy_ui:
+        description: "Deploy UI"
+        required: true
+        default: 'true'
+        type: boolean
+      deploy_backend:
+        description: "Deploy Backend"
+        required: true
+        default: 'true'
+        type: boolean
+
+env:
+  RENDER_DEPLOY_HOOK_UI: ${{ secrets.RENDER_DEPLOY_HOOK_UI }}
+  RENDER_DEPLOY_HOOK_BACKEND: ${{ secrets.RENDER_DEPLOY_HOOK_BACKEND }}
+
+jobs:
+  deploy-ui:
+    runs-on: ubuntu-latest
+    if: github.event.inputs.deploy_ui == 'true'
+
+    steps:
+    - name: Trigger Render deploy for UI
+      run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_UI }}
+
+  deploy-backend:
+    runs-on: ubuntu-latest
+    if: github.event.inputs.deploy_backend == 'true'
+
+    steps:
+    - name: Trigger Render deploy for Backend
+      run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_BACKEND }}
