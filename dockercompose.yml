@@ -4,7 +4,7 @@ services:
     build:
       context: ./ui
       dockerfile: Dockerfile.ui
-    image: yandriievskyu/obox:ui
+    image: yandriievskyi/obox:ui
     volumes:
       - ./ui:/usr/src/app
       - /usr/src/app/node_modules
@@ -16,7 +16,7 @@ services:
     build:
       context: ./server
       dockerfile: Dockerfile.express
-    image: yandriievskyu/obox:server
+    image: yandriievskyi/obox:server
     volumes:
       - ./server:/usr/src/app
       - /usr/src/app/node_modules
