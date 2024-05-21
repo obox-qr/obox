@@ -1,4 +1,4 @@
-name: CI/CD Pipeline
+name: CI/CD Pipeline with Docker Compose
 
 on:
   push:
@@ -13,7 +13,7 @@ env:
   DOCKER_HUB_ACCESS_TOKEN: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
   RENDER_DEPLOY_HOOK_UI: ${{ secrets.RENDER_DEPLOY_HOOK_UI }}
   RENDER_DEPLOY_HOOK_BACKEND: ${{ secrets.RENDER_DEPLOY_HOOK_BACKEND }}
-  VITE_API_URL: ${{ secrets.API_URL }}
+  API_URL: ${{ secrets.API_URL }}
   PORT: ${{ secrets.API_PORT }}
 
 jobs:
@@ -21,36 +21,42 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v1
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
 
-    - name: Set up Docker Compose
-      run: sudo apt-get update && sudo apt-get install docker-compose -y
+      - name: Set up Docker Compose
+        run: sudo apt-get update && sudo apt-get install docker-compose -y
 
-    - name: Log in to Docker Hub
-      run: echo "${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
+      - name: Log in to Docker Hub
+        run: echo "${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
 
-    - name: Build and push UI image
-      run: |
-        docker-compose -f docker-compose.prod.yml build ui
-        docker tag $(docker-compose -f docker-compose.prod.yml images -q ui) yandriievskyi/obox:ui
-        docker push yandriievskyi/obox:ui
+      - name: Build and push UI image (Production)
+        run: |
+          docker-compose -f docker-compose.yml build oboxui
+          docker tag yandriievskyi/obox:ui yandriievskyi/obox:ui
+          docker push yandriievskyi/obox:ui
+        env:
+          API_URL: ${{ secrets.API_URL }}
+          NODE_ENV: production
 
-    - name: Build and push Backend image
-      run: |
-        docker-compose -f docker-compose.prod.yml build backend
-        docker tag $(docker-compose -f docker-compose.prod.yml images -q backend) yandriievskyi/obox:server
-        docker push yandriievskyi/obox:server
+      - name: Build and push Backend image (Production)
+        run: |
+          docker-compose -f docker-compose.yml build oboxbackend
+          docker tag yandriievskyi/obox:server yandriievskyi/obox:server
+          docker push yandriievskyi/obox:server
+        env:
+          PORT: ${{ secrets.API_PORT }}
+          NODE_ENV: production
 
-    - name: Trigger Render deploy for UI
-      if: success()
-      run: |
-        curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_UI }}
+      - name: Trigger Render deploy for UI
+        if: success()
+        run: |
+          curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_UI }}
 
-    - name: Trigger Render deploy for Backend
-      if: success()
-      run: |
-        curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_BACKEND }}
+      - name: Trigger Render deploy for Backend
+        if: success()
+        run: |
+          curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_BACKEND }}
