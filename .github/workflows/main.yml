@@ -10,7 +10,7 @@ on:
 
 env:
   DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
-  DOCKER_HUB_ACCESS_TOKEN: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+  DOCKER_HUB_ACCESS_TOKEN: ${{ secrets.DO_TOKEN }}
   RENDER_DEPLOY_HOOK_UI: ${{ secrets.RENDER_DEPLOY_HOOK_UI }}
   RENDER_DEPLOY_HOOK_BACKEND: ${{ secrets.RENDER_DEPLOY_HOOK_BACKEND }}
   API_URL: ${{ secrets.API_URL }}
@@ -27,11 +27,8 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
 
-    - name: Set up Docker Compose
+    - name: Install Docker Compose
       run: sudo apt-get update && sudo apt-get install docker-compose -y
-
-    - name: Log in to Docker Hub
-      run: echo "${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
 
   build-and-push-ui:
     runs-on: ubuntu-latest
@@ -40,6 +37,9 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
+
+    - name: Log in to Docker Hub
+      run: echo "${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
 
     - name: Build and push UI image
       run: |
@@ -54,6 +54,9 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
+
+    - name: Log in to Docker Hub
+      run: echo "${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
 
     - name: Build and push Backend image
       run: |
