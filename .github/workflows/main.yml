@@ -32,8 +32,13 @@ jobs:
 
     - name: Build and push UI image
       run: |
-        docker build -t yandriievskyu/obox:ui -f ./ui/Dockerfile.ui ./ui
-        docker push yandriievskyu/obox:ui
+        docker build -t yandriievskyi/obox:ui -f ./ui/Dockerfile.ui ./ui
+        docker push yandriievskyi/obox:ui
+
+    - name: Build and push Backend image
+      run: |
+        docker build -t yandriievskyi/obox:server -f ./server/Dockerfile.express ./server
+        docker push yandriievskyi/obox:server
 
     - name: Trigger Render deploy for UI
       if: success()
@@ -42,9 +47,5 @@ jobs:
 
     - name: Trigger Render deploy for Backend
       if: success()
-      run: |
-        curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_BACKEND }}
-
-    - name: Trigger Render deploy for Backend
       run: |
         curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_BACKEND }}
