@@ -13,8 +13,6 @@ env:
 jobs:
   deploy-ui:
     runs-on: ubuntu-latest
-    needs: update-run-name
-    if: github.event.inputs.deploy_ui == 'true'
 
     steps:
     - name: Trigger Render deploy for UI
@@ -22,8 +20,6 @@ jobs:
 
   deploy-backend:
     runs-on: ubuntu-latest
-    needs: update-run-name
-    if: github.event.inputs.deploy_backend == 'true'
 
     steps:
     - name: Trigger Render deploy for Backend
