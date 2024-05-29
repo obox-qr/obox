@@ -1,18 +1,9 @@
 name: Deploy
 
 on:
-  workflow_dispatch:
-    inputs:
-      deploy_ui:
-        description: 'Deploy UI'
-        required: true
-        default: 'true'
-        type: boolean
-      deploy_backend:
-        description: 'Deploy Backend'
-        required: true
-        default: 'true'
-        type: boolean
+  push:
+    branches:
+      - main
 
 run-name: ${{ github.event.inputs.deploy_ui == 'true' && github.event.inputs.deploy_backend == 'false' && 'Deploy - UI' || github.event.inputs.deploy_ui == 'false' && github.event.inputs.deploy_backend == 'true' && 'Deploy - Backend' || github.event.inputs.deploy_ui == 'true' && github.event.inputs.deploy_backend == 'true' && 'Deploy - UI and Backend' }}
 
