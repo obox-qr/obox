@@ -1,0 +1,29 @@
+version: '3'
+services:
+  oboxbackend:
+    build:
+      context: ./server
+      dockerfile: Dockerfile.express
+    image: yandriievskyi/obox:server
+    volumes:
+      - ./server:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      - NODE_ENV=development
+      - PORT=${PORT}
+    ports:
+      - "3000:3000"
+  oboxui:
+    build:
+      context: ./ui
+      dockerfile: Dockerfile.ui
+      args:
+        - VITE_API_URL=${API_URL}
+    image: yandriievskyi/obox:ui
+    volumes:
+      - ./ui:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      - VITE_API_URL=${API_URL}
+    ports:
+      - "8080:8080"

@@ -1,0 +1,26 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  RENDER_DEPLOY_HOOK_UI: ${{ secrets.RENDER_DEPLOY_HOOK_UI }}
+  RENDER_DEPLOY_HOOK_BACKEND: ${{ secrets.RENDER_DEPLOY_HOOK_BACKEND }}
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  deploy-ui:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Trigger Render deploy for UI
+      run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_UI }}
+
+  deploy-backend:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Trigger Render deploy for Backend
+      run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_BACKEND }}
