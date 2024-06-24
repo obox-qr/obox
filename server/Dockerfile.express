@@ -2,6 +2,12 @@ FROM --platform=linux/amd64 node:16.20.2-buster-slim
 # Set the working directory
 WORKDIR /usr/src/app
 
+# Set environment variables based on build arguments
+ENV PORT=$PORT
+ENV DB_CONNECTION_STRING=$DB_CONNECTION_STRING
+ENV JWT_SECRET=$JWT_SECRET
+ENV REFRESH_SECRET=$REFRESH_SECRET
+
 # Copy package.json and package-lock.json
 COPY package*.json ./
 
