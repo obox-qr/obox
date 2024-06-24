@@ -2,7 +2,8 @@ import { ErrorTypes, ResponseStatus } from "../libs/error-codes";
 
 export class NotFoundError extends Error {
   constructor(message: string, cause: ErrorTypes) {
-    super(message, { cause });
+    super(message);
+    this.cause = new Error(cause);
   }
 
   status = ResponseStatus.NOT_FOUND;
@@ -10,7 +11,8 @@ export class NotFoundError extends Error {
 
 export class AuthError extends Error {
   constructor(message: string, cause: ErrorTypes) {
-    super(message, { cause });
+    super(message);
+    this.cause = new Error(cause);
   }
 
   status = ResponseStatus.AUTH_ERROR;

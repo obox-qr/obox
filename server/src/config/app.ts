@@ -3,7 +3,7 @@ import cors from 'cors';
 import swaggerUi from 'swagger-ui-express';
 import { errorHandlingMiddleware } from '../middleware/error-handling';
 import { RegisterRoutes } from "../config/routes";
-import swaggerDoc from '../../swagger.json';
+import swaggerDoc from '../swagger.json';
 import { registerHealthChecks } from './health-check';
 
 export const initApp = () => {
