@@ -42,6 +42,7 @@ jobs:
 
       - name: Build and push UI image
         run: |
+          echo "Building UI..."
           API_URL=${{ secrets.API_URL }} docker-compose -f docker-compose.prod.yml build oboxui
           docker tag yandriievskyi/obox:ui yandriievskyi/obox:ui
           docker push yandriievskyi/obox:ui
@@ -59,9 +60,15 @@ jobs:
 
       - name: Build and push Backend image
         run: |
+          echo "Building Backend..."
+          echo "PORT=${{ secrets.API_PORT }}"
+          echo "DB_CONNECTION_STRING=${{ secrets.DB_CONNECTION_STRING }}"
+          echo "JWT_SECRET=${{ secrets.JWT_SECRET }}"
+          echo "REFRESH_SECRET=${{ secrets.REFRESH_SECRET }}"
           PORT=${{ secrets.API_PORT }} DB_CONNECTION_STRING=${{ secrets.DB_CONNECTION_STRING }} JWT_SECRET=${{ secrets.JWT_SECRET }} REFRESH_SECRET=${{ secrets.REFRESH_SECRET }} docker-compose -f docker-compose.prod.yml build oboxbackend
           docker tag yandriievskyi/obox:server yandriievskyi/obox:server
           docker push yandriievskyi/obox:server
+
   deploy-ui:
     runs-on: ubuntu-latest
     needs: build-and-push-ui

@@ -8,8 +8,6 @@ const getDbConfig = (): DataSourceOptions => {
   const databaseUrl: string = Config.dbConnectionString || '';
   const connectionOptions = PostgressConnectionStringParser.parse(databaseUrl);
 
-  console.log('DB CON STR', databaseUrl);
-
   const entities = [path.join(__dirname, '../entities/**/*.model.ts')];
   connectionOptions.port = '5432';
   
