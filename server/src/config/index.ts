@@ -17,7 +17,3 @@ export const Config: IConfig = {
   accessExpiryHours: 1,
   refreshExpiryHours: 24,
 }
-
-console.log('DB_CONNECTION_STRING:', process.env.DB_CONNECTION_STRING);
-console.log('JWT_SECRET:', process.env.JWT_SECRET);
-console.log('REFRESH_SECRET:', process.env.REFRESH_SECRET);
