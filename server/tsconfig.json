@@ -14,10 +14,7 @@
     "allowImportingTsExtensions": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "baseUrl": "./src",
-    "paths": {
-      "*": ["*", "*.ts"]
-    },
+    "resolveJsonModule": true,
     "types": [
       "node",
       "swagger-jsdoc",

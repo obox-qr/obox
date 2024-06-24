@@ -10,6 +10,9 @@ env:
   DOCKER_HUB_ACCESS_TOKEN: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
   API_URL: ${{ secrets.API_URL }}
   PORT: ${{ secrets.API_PORT }}
+  DB_CONNECTION_STRING: ${{ secrets.DB_CONNECTION_STRING }}
+  JWT_SECRET: ${{ secrets.JWT_SECRET }}
+  REFRESH_SECRET: ${{ secrets.REFRESH_SECRET }}
 
 jobs:
   setup:
