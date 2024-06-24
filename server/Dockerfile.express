@@ -1,9 +1,31 @@
-FROM --platform=linux/amd64 node:16.20.2-buster-slim
+FROM node:14
+
 WORKDIR /usr/src/app
-COPY ./package*.json ./
-RUN npm install 
+
+# Accept build arguments
+ARG PORT
+ARG DB_CONNECTION_STRING
+ARG JWT_SECRET
+ARG REFRESH_SECRET
+
+# Set environment variables based on build arguments
+ENV PORT=$PORT
+ENV DB_CONNECTION_STRING=$DB_CONNECTION_STRING
+ENV JWT_SECRET=$JWT_SECRET
+ENV REFRESH_SECRET=$REFRESH_SECRET
+
+COPY package*.json ./
+RUN npm install
+
 COPY . .
-RUN printenv
-RUN npm install -g ts-node
-EXPOSE 3000
-CMD ["sh", "-c", "if [ \"$NODE_ENV\" = 'development' ]; then npm run dev; else npm run build && npm run start; fi"]
+
+# Print environment variables for debugging
+RUN echo "PORT=$PORT"
+RUN echo "DB_CONNECTION_STRING=$DB_CONNECTION_STRING"
+RUN echo "JWT_SECRET=$JWT_SECRET"
+RUN echo "REFRESH_SECRET=$REFRESH_SECRET"
+
+# Expose the port
+EXPOSE $PORT
+
+CMD ["node", "index.js"]
