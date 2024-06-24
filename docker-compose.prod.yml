@@ -4,6 +4,11 @@ services:
     build:
       context: ./server
       dockerfile: Dockerfile.express
+      args:
+        - PORT=${PORT}
+        - DB_CONNECTION_STRING=${DB_CONNECTION_STRING}
+        - JWT_SECRET=${JWT_SECRET}
+        - REFRESH_SECRET=${REFRESH_SECRET}
     image: yandriievskyi/obox:server
     volumes:
       - ./server:/usr/src/app
