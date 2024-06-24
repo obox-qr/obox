@@ -40,6 +40,13 @@ jobs:
       - name: Log in to Docker Hub
         run: echo "${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
 
+      - name: Print environment variables for debugging
+        run: |
+          echo "DB_CONNECTION_STRING=${{ secrets.DB_CONNECTION_STRING }}"
+          echo "PORT=${{ secrets.API_PORT }}"
+          echo "JWT_SECRET=${{ secrets.JWT_SECRET }}"
+          echo "REFRESH_SECRET=${{ secrets.REFRESH_SECRET }}"
+
       - name: Build and push UI image
         run: |
           API_URL=${{ secrets.API_URL }} docker-compose -f docker-compose.prod.yml build oboxui
