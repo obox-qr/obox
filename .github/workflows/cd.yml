@@ -40,13 +40,6 @@ jobs:
       - name: Log in to Docker Hub
         run: echo "${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
 
-      - name: Print environment variables for debugging
-        run: |
-          echo "DB_CONNECTION_STRING=${{ secrets.DB_CONNECTION_STRING }}"
-          echo "PORT=${{ secrets.API_PORT }}"
-          echo "JWT_SECRET=${{ secrets.JWT_SECRET }}"
-          echo "REFRESH_SECRET=${{ secrets.REFRESH_SECRET }}"
-
       - name: Build and push UI image
         run: |
           API_URL=${{ secrets.API_URL }} docker-compose -f docker-compose.prod.yml build oboxui
@@ -66,7 +59,7 @@ jobs:
 
       - name: Build and push Backend image
         run: |
-          PORT=${{ secrets.API_PORT }} docker-compose -f docker-compose.prod.yml build oboxbackend
+          PORT=${{ secrets.API_PORT }} DB_CONNECTION_STRING=${{ secrets.DB_CONNECTION_STRING }} JWT_SECRET=${{ secrets.JWT_SECRET }} REFRESH_SECRET=${{ secrets.REFRESH_SECRET }} docker-compose -f docker-compose.prod.yml build oboxbackend
           docker tag yandriievskyi/obox:server yandriievskyi/obox:server
           docker push yandriievskyi/obox:server
   deploy-ui:

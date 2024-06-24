@@ -11,7 +11,6 @@ const getDbConfig = (): DataSourceOptions => {
   console.log('DB CON STR', databaseUrl);
 
   const entities = [path.join(__dirname, '../entities/**/*.model.ts')];
-  
   connectionOptions.port = '5432';
   
   const typeOrmOptions: DataSourceOptions = {
