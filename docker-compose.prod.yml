@@ -7,10 +7,12 @@ services:
     image: yandriievskyi/obox:server
     volumes:
       - ./server:/usr/src/app
-      - /usr/src/app/node_modules
     environment:
       - NODE_ENV=production
       - PORT=${PORT}
+      - DB_CONNECTION_STRING=${DB_CONNECTION_STRING}
+      - JWT_SECRET=${JWT_SECRET}
+      - REFRESH_SECRET=${REFRESH_SECRET}
     ports:
       - "3000:3000"
   oboxui:

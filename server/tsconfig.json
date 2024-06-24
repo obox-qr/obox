@@ -1,15 +1,30 @@
 {
   "compilerOptions": {
-    "module": "ESNext",
+    "module": "CommonJS",
     "target": "ESNext",
     "moduleResolution": "node",
+    "rootDir": "./src",
+    "outDir": "./dist",
     "esModuleInterop": true,
     "noImplicitAny": true,
     "skipLibCheck": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "outDir": "./dist"
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "resolveJsonModule": true,
+    "types": [
+      "node",
+      "swagger-jsdoc",
+      "swagger-ui-express"
+    ]
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules"]
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

@@ -1,15 +1,10 @@
-import express, { Express, Request, Response } from 'express';
-import cors from 'cors';
+import 'reflect-metadata';
 
-const app: Express = express();
+import { createDatabaseConnection } from './config/db';
+import { initApp } from './config/app';
 
-const port = process.env.PORT || 3000;
-app.use(cors());
+const catchDatabaseConnectionError = (err: Error) => {
+  console.error('Error during Data Source initialization:', err);
+};
 
-app.get("/", (req: Request, res: Response) => {
-  res.send("Hosted on Render with Typescript based Express Server");
-});
-
-app.listen(port, () => {
-  console.log(`[server]: Server is running at http://localhost:${port}`);
-});
+createDatabaseConnection(initApp, catchDatabaseConnectionError);

@@ -3,6 +3,6 @@ WORKDIR /usr/src/app
 COPY ./package*.json ./
 RUN npm install 
 COPY . .
+RUN npm install -g ts-node
 EXPOSE 3000
-# CMD ["npm", "start"]
 CMD ["sh", "-c", "if [ \"$NODE_ENV\" = 'development' ]; then npm run dev; else npm run build && npm run start; fi"]
