@@ -1,4 +1,4 @@
-name: Build and Deploy
+name: Continuous Deployment
 
 on:
   push:
@@ -9,6 +9,11 @@ env:
   RENDER_DEPLOY_HOOK_UI: ${{ secrets.RENDER_DEPLOY_HOOK_UI }}
   RENDER_DEPLOY_HOOK_BACKEND: ${{ secrets.RENDER_DEPLOY_HOOK_BACKEND }}
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  API_URL: ${{ secrets.API_URL }}
+  PORT: ${{ secrets.API_PORT }}
+  DB_CONNECTION_STRING: ${{ secrets.DB_CONNECTION_STRING }}
+  JWT_SECRET: ${{ secrets.JWT_SECRET }}
+  REFRESH_SECRET: ${{ secrets.REFRESH_SECRET }}
 
 jobs:
   setup:
