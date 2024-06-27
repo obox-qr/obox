@@ -19,13 +19,11 @@ export default [
   {
     ignores: ['node_modules']
   },
-  
- {languageOptions: {
+  {languageOptions: {
     globals: {
       ...globals.node,
       ...globals.browser,
       ...globals.es2022,
-
     }
   }}, 
 
