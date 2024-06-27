@@ -7,14 +7,28 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "format": "prettier --write .",
+    "precommit": "lint-staged",
+    "prepare": "husky install"
   },
   "dependencies": {
     "axios": "^1.6.8",
     "dotenv": "^16.4.5",
+    "husky": "9.0.11",
+    "lint-staged": "15.2.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+    "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix"
+    ],
   "devDependencies": {
     "@eslint/compat": "^1.1.0",
     "@eslint/js": "9.5.0",
@@ -28,12 +42,13 @@
     "eslint-plugin-react": "7.34.3",
     "eslint-plugin-react-hooks": "4.6.0",
     "eslint-plugin-react-refresh": "0.4.6",
+    "git-format-staged": "^3.1.1",
     "globals": "15.6.0",
+    "prettier": "3.3.2",
     "typescript": "^5.2.2",
-    "typescript-eslint": "7.14.1",
     "vite": "^5.2.0"
   },
-    "overrides": {
-      "eslint": "9.5.0"
-    } 
+  "overrides": {
+    "eslint": "9.5.0"
+  }
 }
