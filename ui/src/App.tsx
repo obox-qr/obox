@@ -44,5 +44,3 @@ export function App() {
     </>
   );
 }
-
-let s = ['e', [re]];
