@@ -46,3 +46,4 @@ export const App = () => {
 };
 
 const name = 'FD';
+var = obj{ };
