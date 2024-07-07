@@ -44,4 +44,5 @@ export function App() {
     </>
   );
 }
-const fdgd = gdgdgd;
+
+let s = ['e', [re]];
