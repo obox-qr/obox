@@ -4,6 +4,7 @@ module.exports = {
     'airbnb',
     'airbnb-typescript',
     'airbnb/hooks',
+    'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
   ],
   overrides: [
@@ -24,7 +25,7 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: ['@typescript-eslint', 'react', 'react-refresh'],
+  plugins: ['@typescript-eslint', 'react', 'react-refresh', 'prettier'],
   rules: {
     'no-console': [
       'error',
