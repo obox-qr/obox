@@ -9,6 +9,8 @@ ENV DB_CONNECTION_STRING=$DB_CONNECTION_STRING
 ENV JWT_SECRET=$JWT_SECRET
 ENV REFRESH_SECRET=$REFRESH_SECRET
 COPY package*.json ./
+RUN npm install reflect-metadata
+RUN npm install -g tsoa
 RUN npm install
 COPY . .
 EXPOSE $PORT

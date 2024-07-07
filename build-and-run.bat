@@ -12,4 +12,4 @@ if not exist ".env" (
   echo .env file already exists. Skipping creation.
 )
 
-docker-compose -f docker-compose.dev.yml up --build
+docker-compose -f docker-compose.win.yml up --build
