@@ -29,8 +29,20 @@ export const App = () => {
   return (
     <>
       <h1>Welcome to OBOX</h1>
-      <p>API status: <span style={{'color': apiStatus.status === 'UP' ? 'green' : 'red'}}>{apiStatus.status}</span></p>
-      <p>DB status: <span style={{'color': apiStatus.db === 'UP' ? 'green' : 'red'}}>{apiStatus.db}</span></p>
+      <p>
+        API status:{' '}
+        <span style={{ color: apiStatus.status === 'UP' ? 'green' : 'red' }}>
+          {apiStatus.status}
+        </span>
+      </p>
+      <p>
+        DB status:{' '}
+        <span style={{ color: apiStatus.db === 'UP' ? 'green' : 'red' }}>
+          {apiStatus.db}
+        </span>
+      </p>
     </>
   );
 };
+
+const name = 'FD';
