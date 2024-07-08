@@ -29,7 +29,7 @@ const App: React.FC = () => {
 
   return (
     <>
-      <h1>Добро пожаловать в OBOX</h1>
+      <h1>Добро пожаловать в OBOX </h1>
       <p>
         Статус API:{' '}
         <span style={{ color: apiStatus.status === 'UP' ? 'green' : 'red' }}>
