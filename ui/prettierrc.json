@@ -4,5 +4,6 @@
   "jsxBracketSameLine": false,
   "tabWidth": 2,
   "semi": true,
-  "printWidth": 80
+  "printWidth": 80,
+  "endOfLine": "auto"
 }
