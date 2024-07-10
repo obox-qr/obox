@@ -41,9 +41,9 @@ const theme = {
   accentOrangeVeryPale: "#FFD5C3",
 
   systemInfo: "#363DFA",
-  systemWarning: "#11BF18",
+  systemWarning: "#FFD900",
   systemError: "#F21111",
-  systemSuccess: "#FFD900",
+  systemSuccess: "#11BF18",
 
   //=========================== FONT-SIZE ===========================
   fontSizeLarge: "40px",
