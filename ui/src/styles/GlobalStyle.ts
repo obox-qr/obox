@@ -65,7 +65,7 @@ button {
   cursor: pointer;
 	font-size: ${(props) => props.theme.fontSizeExtraSmall};
 	font-weight: ${(props) => props.theme.fontWeightMedium};
-	line-height: ${(props) => props.theme.lineHeightLoose};	
+	line-height: ${(props) => props.theme.lineHeightLoose};
 }
 
 input, select, textarea {
@@ -73,7 +73,7 @@ input, select, textarea {
   font-size: ${(props) => props.theme.fontSizeExtraSmall};
 	font-weight: ${(props) => props.theme.fontWeightRegular};
 	line-height:${(props) => props.theme.lineHeightNormal};
-  border-width: ${(props) => props.theme.borderWidthSmall};  
+  border-width: ${(props) => props.theme.commonBorder};  
 	border-radius: ${(props) => props.theme.borderRadiusSmall};
 	border-style: ${(props) => props.theme.borderStyle};
 	background-color: ${(props) => props.theme.whitePure};
