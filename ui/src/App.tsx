@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import axios from 'axios';
 import config from './config';
@@ -7,7 +7,7 @@ const { apiUrl } = config;
 
 const healthCheckUrl = `${apiUrl}/health`;
 
-const App: React.FC = () => {
+export const App = () => {
   const [apiStatus, setApiStatus] = useState({
     status: 'DOWN',
     db: 'DOWN',
@@ -45,5 +45,3 @@ const App: React.FC = () => {
     </>
   );
 };
-
-export default App;

@@ -22,6 +22,7 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   parserOptions: {
     project: './tsconfig.json',
+    tsconfigRootDir: './',
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
@@ -38,6 +39,8 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     // Disable the warning about missing displayName in React components
     'react/display-name': 'off',
+    // Disable the rule that prefers default exports
+    'import/prefer-default-export': 'off',
     // Enforce 2-space indentation
     indent: ['error', 2],
     // Enforce Unix line endings (LF)
