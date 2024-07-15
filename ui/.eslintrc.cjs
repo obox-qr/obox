@@ -1,18 +1,65 @@
 module.exports = {
-  root: true,
-  env: { browser: true, es2020: true },
+  env: { browser: true, es2020: true, node: true },
   extends: [
-    'eslint:recommended',
+    'airbnb',
+    'airbnb-typescript',
+    'airbnb/hooks',
     'plugin:@typescript-eslint/recommended',
-    'plugin:react-hooks/recommended',
+    'plugin:prettier/recommended',
   ],
-  ignorePatterns: ['dist', '.eslintrc.cjs'],
+  overrides: [
+    {
+      env: {
+        node: true,
+      },
+      files: ['.eslintrc.{js,cjs}'],
+      parserOptions: {
+        sourceType: 'script',
+      },
+    },
+  ],
+  ignorePatterns: ['dist', '.eslintrc.cjs', 'node_modules'],
   parser: '@typescript-eslint/parser',
-  plugins: ['react-refresh'],
-  rules: {
-    'react-refresh/only-export-components': [
-      'warn',
-      { allowConstantExport: true },
-    ],
+  parserOptions: {
+    project: './tsconfig.json',
+    tsconfigRootDir: './',
+    ecmaVersion: 'latest',
+    sourceType: 'module',
   },
-}
+  plugins: ['@typescript-eslint', 'react', 'react-refresh', 'prettier'],
+  rules: {
+    // Disallow the use of console, but allow the use of console.error
+    'no-console': [
+      'error',
+      {
+        allow: ['error'],
+      },
+    ],
+    // Disable the rule that requires React to be in scope when using JSX
+    'react/react-in-jsx-scope': 'off',
+    // Disable the warning about missing displayName in React components
+    'react/display-name': 'off',
+    // Disable the rule that prefers default exports
+    'import/prefer-default-export': 'off',
+    // Enforce 2-space indentation
+    indent: ['error', 2],
+    // Enforce Unix line endings (LF)
+    'linebreak-style': ['error', 'unix'],
+    // Enforce the use of single quotes for strings
+    quotes: ['error', 'single'],
+    // Enforce the use of semicolons at the end of statements
+    semi: ['error', 'always'],
+    // Rules for defining functional components
+    'react/function-component-definition': [
+      'error',
+      {
+        // Require the use of arrow functions for named components
+        namedComponents: 'arrow-function',
+        // Require the use of arrow functions for unnamed components
+        unnamedComponents: 'arrow-function',
+      },
+    ],
+    // Enforce newline at the end of file, with no multiple empty lines
+    'eol-last': ['error', 'always'],
+  },
+};
