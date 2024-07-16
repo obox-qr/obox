@@ -8,13 +8,12 @@ import { LoggerModule } from '@/common/utils/logger/logger.module';
 import { UsersModule } from './users/users.module';
 
 import { AppService } from './app.service';
+import { HealthModule } from './health/health.module';
 
 import config from './config';
 
 @Module({
   imports: [
-    UsersModule,
-    LoggerModule,
     ConfigModule.forRoot({
       envFilePath: path.resolve(__dirname, '../../', '.env'),
       load: [config],
@@ -41,6 +40,9 @@ import config from './config';
       }),
       inject: [ConfigService],
     }),
+    HealthModule,
+    LoggerModule,
+    UsersModule,
   ],
   providers: [AppService],
 })
