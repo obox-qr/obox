@@ -3,7 +3,7 @@ type AppConfig = {
 };
 
 const config: AppConfig = {
-  apiUrl: 'https://example.com/api',
+  apiUrl: import.meta.env.VITE_API_URL,
 };
 
 export default config;
