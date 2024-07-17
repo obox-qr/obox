@@ -1,9 +1,11 @@
-import { useQuery } from '@tanstack/react-query';
+import { QueryFunction, useQuery } from '@tanstack/react-query';
 
-export function useGetUser(key: string, cb: any) {
-	const data = useQuery({
-		queryKey: [key],
-		queryFn: cb
-	})
-	return data
+export function useGetUser(
+  key: string,
+  cb: QueryFunction<never, string[], never>
+) {
+  return useQuery({
+    queryKey: [key],
+    queryFn: cb,
+  });
 }

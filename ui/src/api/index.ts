@@ -1,5 +1,8 @@
-import AuthApi from './auth-api.ts';
+import AuthApi from './auth-api';
+import HealthCheckApi from './healthcheck-api';
 
 export default class ApiService {
-	static getAuthApi = () => AuthApi;
+  static getAuthApi = () => AuthApi;
+
+  static getHealthCheckApi = () => HealthCheckApi;
 }
