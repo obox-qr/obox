@@ -4,7 +4,7 @@ services:
   oboxbackend:
     build:
       context: ./server
-      dockerfile: Dockerfile.express
+      dockerfile: Dockerfile.api
     image: yandriievskyi/obox:server
     volumes:
       - ./server:/usr/src/app
