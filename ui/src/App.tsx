@@ -8,7 +8,7 @@ const { apiUrl } = config;
 
 const healthCheckUrl = `${apiUrl}/health`;
 
-export const App = () => {
+const App = () => {
   const [apiStatus, setApiStatus] = useState({
     status: 'down',
     db: 'down',
@@ -50,3 +50,5 @@ export const App = () => {
     </>
   );
 };
+
+export default App;
