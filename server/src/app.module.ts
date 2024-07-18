@@ -7,7 +7,6 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { LoggerModule } from '@/common/utils/logger/logger.module';
 import { UsersModule } from './users/users.module';
 
-import { AppService } from './app.service';
 import { HealthModule } from './health/health.module';
 
 import config from './config';
@@ -44,6 +43,5 @@ import config from './config';
     LoggerModule,
     UsersModule,
   ],
-  providers: [AppService],
 })
 export class AppModule {}
