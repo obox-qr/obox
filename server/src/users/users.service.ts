@@ -2,7 +2,7 @@ import * as bcrypt from 'bcryptjs';
 
 import { Inject, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { AppLogger } from '@/common/utils/logger/logger.service';
+import { AppLogger } from '@/common/utils/logger/logger';
 
 import { UsersRepository } from './users.repository';
 import { User } from './users.entity';
