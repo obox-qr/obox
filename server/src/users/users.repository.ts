@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { FindOptionsWhere, Repository } from 'typeorm';
 
 import { CreateUserRequestDto } from '@/common/dto/auth/create-user.request.dto';
-import { AppLogger } from '@/common/utils/logger/logger.service';
+import { AppLogger } from '@/common/utils/logger/logger';
 
 import { User } from './users.entity';
 
