@@ -1,25 +1,24 @@
 import { useEffect, useState } from 'react';
-import ApiService from './api';
-import { useGetUser } from './api/hooks';
-import { getUser } from './api/fetch-func/user';
+import ApiService, { ServicesNames } from './api';
+import { HealthCheckApiInterface } from './api/services/healthcheck-api';
 import './App.css';
 
-export const App = () => {
-  const [apiStatus, setApiStatus] = useState({
-    status: 'down',
-    db: 'down',
-  });
+const initStatusState = {
+  status: 'down',
+  db: 'down',
+};
 
-  const { data } = useGetUser('getUser', getUser);
+export const App = () => {
+  const [apiStatus, setApiStatus] = useState(initStatusState);
 
   useEffect(() => {
-    ApiService.getHealthCheckApi()
+    ApiService.getService<HealthCheckApiInterface>(ServicesNames.HEALTHCHECK)
       .healthCheck()
       .then(({ data }) => {
         const { details } = data;
         setApiStatus({
-          status: details['nestjs-docs'].status,
-          db: details.database.status,
+          status: details['nestjs-docs']?.status ?? initStatusState.status,
+          db: details.database?.status ?? initStatusState.db,
         });
       });
   }, []);

@@ -1,1 +1,1 @@
-export * from './user-hooks.ts';
+export * from './user-hooks';

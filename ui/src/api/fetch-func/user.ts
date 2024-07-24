@@ -1,7 +1,9 @@
-import ApiService from '../index';
-import Paths from '../paths';
+import ApiService, { ServicesNames } from '../index';
+import { AuthApiInterface } from '../services/auth-api';
 
 export async function getUser() {
-  const res = await ApiService.getAuthApi().fetchUser(Paths.USER);
+  const res = await ApiService.getService<AuthApiInterface>(
+    ServicesNames.AUTH
+  ).fetchUser();
   return res.data;
 }
