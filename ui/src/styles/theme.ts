@@ -1,12 +1,12 @@
 import { createTheme } from '@mui/material/styles';
-import { CustomPalette } from './theme.types.ts';
+import { CustomStyles } from './theme.types.ts';
 
 declare module '@mui/material/styles' {
   interface Theme {
-    main: CustomPalette;
+    main: CustomStyles;
   }
   interface ThemeOptions {
-    main?: CustomPalette;
+    main?: CustomStyles;
   }
 }
 

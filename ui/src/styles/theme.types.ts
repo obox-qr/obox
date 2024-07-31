@@ -1,4 +1,4 @@
-export interface CustomPalette {
+export interface CustomStyles {
   custom: {
     systemInfo: string;
     systemWarning: string;
