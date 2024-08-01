@@ -3,7 +3,7 @@ export interface CustomStyles {
     systemInfo: string;
     systemWarning: string;
     systemError: string;
-		systemSuccess: string;
+    systemSuccess: string;
 		
     primaryGreenDarkest: string;
     primaryGreenDarker: string;
