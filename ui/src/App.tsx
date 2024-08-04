@@ -1,53 +1,72 @@
+import { useTheme } from '@mui/material/styles';
+import axios from 'axios';
 import { useEffect, useState } from 'react';
-import ApiService, { ServicesNames } from './api';
-import { HealthCheckApiInterface } from './api/services/healthcheck-api';
 import './App.css';
+import config from './config';
 
-const initStatusState = {
-  status: 'down',
-  db: 'down',
-};
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
+import AuthLayout from './components/layouts/AuthLayout.tsx';
+import MainLayout from './components/layouts/MainLayout.tsx';
+import AuthRoute from './components/routes/AuthRoute.tsx';
+import MainRoute from './components/routes/MainRoute.tsx';
+import NotFoundRoute from './components/routes/NotFoundRoute.tsx';
+
+const { apiUrl } = config;
+
+const healthCheckUrl = `${apiUrl}/health`;
 
 export const App = () => {
-  const [apiStatus, setApiStatus] = useState(initStatusState);
-
+  const theme = useTheme();
+  const [apiStatus, setApiStatus] = useState({
+    status: 'DOWN',
+    db: 'DOWN',
+  });
   useEffect(() => {
-    ApiService.getService<HealthCheckApiInterface>(ServicesNames.HEALTHCHECK)
-      .healthCheck()
-      .then(({ data }) => {
-        const { details } = data;
-        setApiStatus({
-          status: details['nestjs-docs']?.status ?? initStatusState.status,
-          db: details.database?.status ?? initStatusState.db,
-        });
+    if (!apiUrl) {
+      setApiStatus({
+        status: 'DOWN',
+        db: 'DOWN',
       });
+      return;
+    }
+
+    axios.get(healthCheckUrl).then(({ data }) => {
+      setApiStatus(data);
+    });
   }, []);
 
   return (
     <>
-      <h1>Welcome to OBOX</h1>
-      <p style={{ display: 'flex', justifyContent: 'center', gap: '5px' }}>
-        <span>API status:</span>
-        <span
-          style={{
-            color: apiStatus.status === 'up' ? 'green' : 'red',
-            textTransform: 'uppercase',
-          }}
-        >
+      <h1 style={{ color: theme.main.custom.greyGreenDarker }}>
+        Welcome to OBOX
+      </h1>
+      <p style={{ color: theme.main.custom.greyGreenDarker }}>
+        API status:{' '}
+        <span style={{ color: apiStatus.status === 'UP' ? 'green' : 'red' }}>
           {apiStatus.status}
         </span>
       </p>
-      <p style={{ display: 'flex', justifyContent: 'center', gap: '5px' }}>
-        <span>DB status:</span>
-        <span
-          style={{
-            color: apiStatus.db === 'up' ? 'green' : 'red',
-            textTransform: 'uppercase',
-          }}
-        >
+      <p style={{ color: theme.main.custom.greyGreenDarker }}>
+        DB status:{' '}
+        <span style={{ color: apiStatus.db === 'UP' ? 'green' : 'red' }}>
           {apiStatus.db}
         </span>
       </p>
+      <BrowserRouter>
+        <Routes>
+          <Route element={<MainLayout />}>
+            <Route path="/" element={<MainRoute />} />
+          </Route>
+
+          <Route element={<AuthLayout />}>
+            <Route path="/auth" element={<AuthRoute />} />
+          </Route>
+
+          <Route path="/not-found" element={<NotFoundRoute />} />
+          <Route path="*" element={<NotFoundRoute />} />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 };
