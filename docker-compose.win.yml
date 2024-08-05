@@ -3,7 +3,7 @@ services:
   oboxbackend:
     build:
       context: ./server
-      dockerfile: Dockerfile.express
+      dockerfile: Dockerfile.api
       args:
         - PORT=${PORT}
         - DB_CONNECTION_STRING=${DB_CONNECTION_STRING}
