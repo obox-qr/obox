@@ -1,9 +1,8 @@
-version: "3"
 services:
   oboxbackend:
     build:
       context: ./server
-      dockerfile: Dockerfile.express
+      dockerfile: Dockerfile.api
       args:
         - PORT=${PORT}
         - DB_CONNECTION_STRING=${DB_CONNECTION_STRING}
@@ -19,7 +18,7 @@ services:
       - JWT_SECRET=${JWT_SECRET}
       - REFRESH_SECRET=${REFRESH_SECRET}
     ports:
-      - "3000:3000"
+      - '3000:3000'
   oboxui:
     build:
       context: ./ui
@@ -33,4 +32,4 @@ services:
     environment:
       - VITE_API_URL=${API_URL}
     ports:
-      - "8080:8080"
+      - '8080:8080'

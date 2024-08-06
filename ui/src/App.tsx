@@ -1,7 +1,12 @@
 import { useEffect, useState } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ApiService, { ServicesNames } from './api';
 import { HealthCheckApiInterface } from './api/services/healthcheck-api';
 import './App.css';
+
+import { useTheme } from '@mui/material/styles';
+import * as Layouts from './components/layouts';
+import * as MyRoutes from './components/routes';
 
 const initStatusState = {
   status: 'down',
@@ -10,6 +15,8 @@ const initStatusState = {
 
 export const App = () => {
   const [apiStatus, setApiStatus] = useState(initStatusState);
+
+  const theme = useTheme();
 
   useEffect(() => {
     ApiService.getService<HealthCheckApiInterface>(ServicesNames.HEALTHCHECK)
@@ -25,8 +32,17 @@ export const App = () => {
 
   return (
     <>
-      <h1>Welcome to OBOX</h1>
-      <p style={{ display: 'flex', justifyContent: 'center', gap: '5px' }}>
+      <h1 style={{ color: theme.main.custom.greyGreenDarker }}>
+        Welcome to OBOX
+      </h1>
+      <p
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          gap: '5px',
+          color: theme.main.custom.greyGreenDarker,
+        }}
+      >
         <span>API status:</span>
         <span
           style={{
@@ -37,8 +53,17 @@ export const App = () => {
           {apiStatus.status}
         </span>
       </p>
-      <p style={{ display: 'flex', justifyContent: 'center', gap: '5px' }}>
-        <span>DB status:</span>
+      <p
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          gap: '5px',
+          color: theme.main.custom.greyGreenDarker,
+        }}
+      >
+        <span style={{ color: theme.main.custom.greyGreenDarker }}>
+          DB status:
+        </span>
         <span
           style={{
             color: apiStatus.db === 'up' ? 'green' : 'red',
@@ -48,6 +73,20 @@ export const App = () => {
           {apiStatus.db}
         </span>
       </p>
+
+      <BrowserRouter>
+        <Routes>
+          <Route element={<Layouts.MainLayout />}>
+            <Route path="/" element={<MyRoutes.MainRoute />} />
+          </Route>
+          <Route element={<Layouts.AuthLayout />}>
+            <Route path="/auth" element={<MyRoutes.AuthRoute />} />
+          </Route>
+
+          <Route path="/not-found" element={<MyRoutes.NotFoundRoute />} />
+          <Route path="*" element={<MyRoutes.NotFoundRoute />} />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 };
