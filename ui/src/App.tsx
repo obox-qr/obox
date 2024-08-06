@@ -1,10 +1,10 @@
-import { useTheme } from '@mui/material/styles';
 import { useEffect, useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ApiService, { ServicesNames } from './api';
 import { HealthCheckApiInterface } from './api/services/healthcheck-api';
 import './App.css';
 
+import { useTheme } from '@mui/material/styles';
 import * as Layouts from './components/layouts';
 import * as MyRoutes from './components/routes';
 
