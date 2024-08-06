@@ -48,7 +48,6 @@ export const App = () => {
           style={{
             color: apiStatus.status === 'up' ? 'green' : 'red',
             textTransform: 'uppercase',
-            color: theme.main.custom.greyGreenDarker,
           }}
         >
           {apiStatus.status}
